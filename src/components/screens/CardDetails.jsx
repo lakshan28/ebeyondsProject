@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Typography, Grid, Card, useMediaQuery } from "@material-ui/core";
+import { Typography, Grid, Card } from "@material-ui/core";
 
 import image1 from "../../img/imageCard.jpg";
 import image2 from "../../img/imageCard2.png";
