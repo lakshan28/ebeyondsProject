@@ -2,7 +2,8 @@ import React from "react";
 
 import { Typography, Grid, Card, useMediaQuery } from "@material-ui/core";
 
-import book from "../../img/background.jpg";
+import image1 from "../../img/imageCard.jpg";
+import image2 from "../../img/imageCard2.png";
 
 function CardDetails({ classes }) {
   return (
@@ -12,7 +13,7 @@ function CardDetails({ classes }) {
       </Grid>
 
       <Grid container item xs={12} justify="center">
-        <Grid container item xs={6}>
+        <Grid container item xs={10} sm={10} md={8} lg={6}>
           <Typography variant="subtitle1" align="center">
             {" "}
             Lorem ipsum, or lipsum as it is sometimes known, is dummy text used
@@ -32,7 +33,7 @@ function CardDetails({ classes }) {
       >
         <Grid container item xs={12} sm={12} md={6} lg={3} justify="center">
           <Card>
-            <img src={book} alt="card" className={classes.cardImg} />
+            <img src={image1} alt="card" className={classes.cardImg} />
             <Typography
               align="center"
               variant="h5"
@@ -53,7 +54,7 @@ function CardDetails({ classes }) {
         </Grid>
         <Grid container item xs={12} sm={12} md={6} lg={3} justify="center">
           <Card>
-            <img src={book} alt="card" className={classes.cardImg} />
+            <img src={image2} alt="card" className={classes.cardImg} />
             <Typography
               align="center"
               variant="h5"
@@ -74,7 +75,7 @@ function CardDetails({ classes }) {
         </Grid>
         <Grid container item xs={12} sm={12} md={6} lg={3} justify="center">
           <Card>
-            <img src={book} alt="card" className={classes.cardImg} />
+            <img src={image1} alt="card" className={classes.cardImg} />
             <Typography
               align="center"
               variant="h5"

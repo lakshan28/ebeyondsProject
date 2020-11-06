@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import {
   createMuiTheme,
-  responsiveFontSizes,
   ThemeProvider,
   useTheme,
 } from "@material-ui/core/styles";
@@ -11,7 +11,6 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  CssBaseline,
   useScrollTrigger,
   Fab,
   Zoom,
@@ -26,11 +25,6 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
-import book from "../../img/background.jpg";
-import grils from "../../img/background.jpg";
-import team from "../../img/background.jpg";
-import back from "../../img/background.jpg";
 
 import CardDetails from "./CardDetails";
 import Footer from "./Footer";
@@ -116,63 +110,82 @@ function Landing(props) {
   const getUseTheme = useTheme();
   const matches = useMediaQuery(getUseTheme.breakpoints.up("sm"));
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMenuOpen = Boolean(anchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
   };
-  const mobileMenuId = "primary-search-account-menu-mobile";
+
+  const menuId = "primary-search-account-menu";
   const renderMobileMenu = (
     <Menu
-      anchorEl={mobileMoreAnchorEl}
+      anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
+      id={menuId}
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={() => setMobileMoreAnchorEl(false)}>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <MailIcon />
         </IconButton>
-        <p>HOME</p>
+        <Link exact to="/home" className={classes.navLinkSmall}>
+          HOME
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
-          <NotificationsIcon />
+          <AccountCircle />
         </IconButton>
-        <p>ABOUT</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <MailIcon />
-        </IconButton>
-        <p>SERVICES</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <NotificationsIcon />
-        </IconButton>
-        <p>TESTIMONIALS</p>
+        <Link exact to="/about" className={classes.navLinkSmall}>
+          ABOUT
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <MailIcon />
         </IconButton>
-        <p>PORTFOLIO</p>
+        <Link exact to="/services" className={classes.navLinkSmall}>
+          SERVICES
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton aria-label="show 11 new notifications" color="inherit">
+          <AccountCircle />
+        </IconButton>
+        <Link exact to="/testimnils" className={classes.navLinkSmall}>
+          TESTIMONIALS
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton aria-label="show 4 new mails" color="inherit">
+          <MailIcon />
+        </IconButton>
+        <Link exact to="/portfilo" className={classes.navLinkSmall}>
+          PORTFOLIO
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <NotificationsIcon />
         </IconButton>
-        <p>CONTACTS</p>
+        <Link exact to="/contacts" className={classes.navLinkSmall}>
+          CONTACTS
+        </Link>
       </MenuItem>
     </Menu>
   );
@@ -187,22 +200,39 @@ function Landing(props) {
               className={classes.sectionDesktop}
             >
               <Grid item xs={1}>
-                HOME
+                <Link to="/home" className={classes.navLink}>
+                  HOME
+                </Link>
               </Grid>
               <Grid item xs={1}>
-                ABOUT
+                <Link exact to="/about" className={classes.navLink}>
+                  ABOUT
+                </Link>
               </Grid>
               <Grid item xs={1}>
-                SERVICES
+                <Link exact to="/services" className={classes.navLink}>
+                  SERVICES
+                </Link>
               </Grid>
               <Grid item xs={1}>
-                TESTIMONIALS
+                <Link
+                  onClick={() => setMobileMoreAnchorEl(null)}
+                  exact
+                  to="/testimnils"
+                  className={classes.navLink}
+                >
+                  TESTIMONIALS
+                </Link>
               </Grid>
               <Grid item xs={1}>
-                PORTFOLIO
+                <Link exact to="/portfilo" className={classes.navLink}>
+                  PORTFOLIO
+                </Link>
               </Grid>
               <Grid item xs={1}>
-                CONTACTS
+                <Link exact to="/contacts" className={classes.navLink}>
+                  CONTACTS
+                </Link>
               </Grid>
             </Grid>
             <Grid
@@ -212,10 +242,11 @@ function Landing(props) {
             >
               <div>
                 <IconButton
-                  aria-label="show more"
-                  aria-controls={mobileMenuId}
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
                   aria-haspopup="true"
-                  onClick={handleMobileMenuOpen}
+                  onClick={handleProfileMenuOpen}
                   color="inherit"
                 >
                   <MoreIcon />

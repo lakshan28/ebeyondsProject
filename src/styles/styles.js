@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundAttachment: "fixed",
     marginTop: "-1.5rem",
     flexGrow: 1,
+    [theme.breakpoints.down('sm')]: {
+      height:"60vh",
+      
+  },
   },
   appbar:{
       backgroundColor:"#707070"
@@ -35,6 +39,15 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "1rem",
     marginRight: "2rem",
     opacity: "0.9",
+    [theme.breakpoints.down('sm')]: {
+      width: "40rem",
+    height: "10rem",
+    backgroundColor: "#21282a",
+    borderRadius: "1rem",
+    marginRight: "0rem",
+    opacity: "0.9",
+      
+  },
   },
 
   cardImg:{
@@ -47,6 +60,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "1rem", padding: "1rem"
   },
 
+  navLink: {
+    textDecoration: "none", color: "#fff"
+  },
+  navLinkSmall: {
+    textDecoration: "none", color: "#000"
+  },
   sectionDesktop: {
     
     display: "none",
